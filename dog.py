@@ -17,7 +17,11 @@ class Dog:
     def bark(self):
         print(self.greeting)
 
-my_dog = Dog("Mel")
-print(my_dog.name)
-my_dog.bark()
+myFirstDog = Dog("Mel")
+mySecondDog = Dog("Max")
 
+print(myFirstDog.name)
+print(mySecondDog.name)
+
+myFirstDog.bark()
+mySecondDog.bark()
