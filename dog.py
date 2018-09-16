@@ -1,15 +1,23 @@
-dogs = list()
-dogs.append("German Shepherd")
-dogs.append("Poodle")
-print(dogs)
+# class Dog: 
+#     # greeting = "Woof!"
+#     name = "Spot"
 
-class Dog: 
+#     def __init__(self, name):
+#         # self.greeting = greeting
+#         self.name = name
+
+#     def bark(self):
+#         print(self.name)
+class Dog:
+    greeting = "Woof!"
+
+    def __init__(self, name):
+        self.name = name
+
     def bark(self):
-        print("Woof!")
-# we can't do this. That's like telling all dogs to bark.
-# Dog.bark() 
+        print(self.greeting)
 
-# instead, we want to tell tell an specific dog to bark.
-myDog = Dog()
-myDog.bark()
-print(__name__)
+my_dog = Dog("Mel")
+print(my_dog.name)
+my_dog.bark()
+
