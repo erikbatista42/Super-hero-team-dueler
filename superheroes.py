@@ -27,7 +27,7 @@ class Hero(Ability):
 	def attack(self): # this method 
 		total = 0
 		for ab in self.abilities: # iterates over the abilities list
-			total += Ability.attack(ab) # goes into Ability and calls the attack method. Gives the total var value an random int
+			total += Ability.attack(ab) # 
 		return total
 
 
