@@ -96,33 +96,76 @@ def update_kills(self):
 
 
 if __name__ == "__main__":
-    hero1 = Hero("Wonder Woman")
-    #print(hero1.attack())
-    ability = Ability("Divine Speed", 300)
-    hero1.add_ability(ability)
-    #print(hero1.attack())
-    new_ability = Ability("Super Human Strength", 800)
-    hero1.add_ability(new_ability)
-    #print(hero1.attack())
 
-    hero2 = Hero("Thor")
-    ability2 = Ability("Flying Hammer", 500)
-    hero2.add_ability(ability2)
+	# Wonder Woman
+	heroOne = Hero("Wonder Woman")
+	print(heroOne.name)
+	punchAbility = Ability("Punch", 200)
+	heroOne.add_ability(punchAbility)
+	print(heroOne.attack())
 
-    hero3 = Hero("Yosemite Sam")
-    ability3 = Ability("Lasso", 600)
-    hero3.add_ability(ability3)
+	# Superman
+	heroTwo = Hero("Superman")
+	print(heroTwo.name)
+	superPunch = Ability("Superman Punch", 700)
+	heroTwo.add_ability(superPunch)
+	print(heroTwo.attack())
 
-    teamOfHeroes = Team("Losers")
-    print(teamOfHeroes.add_hero(hero1))
-    print(teamOfHeroes.add_hero(hero2))
-    print(teamOfHeroes.add_hero(hero3))
-    print(teamOfHeroes.find_hero("Yosemite Sam"))
-    print(teamOfHeroes.remove_hero("Yosemite Sam"))
-    #print(teamOfHeroes.remove_hero("Jabba")) # supposed to return 0
-    print(teamOfHeroes.find_hero("Wonder Woman"))
-    print(teamOfHeroes.find_hero("Yosemite Sam"))
-    teamOfHeroes.view_all_heroes()
+	# Batman
+	heroThree = Hero("Batman")
+	print(heroThree.name)
+	headBumb = Ability("Head bumb", 8000)
+	heroThree.add_ability(headBumb)
+
+	# Super Chicken
+	heroFour = Hero("Super Chicken")
+	flapWings = Ability("Flap wings", 200)
+	heroFour.add_ability(flapWings)
+
+	# Shotgun weapon
+	weaponOne = Weapon("Shotgun", 1000)
+	print(weaponOne.name)
+	print(weaponOne.attack_strength)
+	print(weaponOne.attack())
+
+
+	teamOne = Team("losers")
+	teamOne.add_hero(heroTwo)
+	teamOne.add_hero(heroThree)
+	teamOne.view_all_heroes()
+
+
+
+
+
+
+    # hero1 = Hero("Wonder Woman")
+    # #print(hero1.attack())
+    # ability = Ability("Divine Speed", 300)
+    # hero1.add_ability(ability)
+    # #print(hero1.attack())
+    # new_ability = Ability("Super Human Strength", 800)
+    # hero1.add_ability(new_ability)
+    # #print(hero1.attack())
+
+    # hero2 = Hero("Thor")
+    # ability2 = Ability("Flying Hammer", 500)
+    # hero2.add_ability(ability2)
+
+    # hero3 = Hero("Yosemite Sam")
+    # ability3 = Ability("Lasso", 600)
+    # hero3.add_ability(ability3)
+
+    # teamOfHeroes = Team("Losers")
+    # print(teamOfHeroes.add_hero(hero1))
+    # print(teamOfHeroes.add_hero(hero2))
+    # print(teamOfHeroes.add_hero(hero3))
+    # print(teamOfHeroes.find_hero("Yosemite Sam"))
+    # print(teamOfHeroes.remove_hero("Yosemite Sam"))
+    # #print(teamOfHeroes.remove_hero("Jabba")) # supposed to return 0
+    # print(teamOfHeroes.find_hero("Wonder Woman"))
+    # print(teamOfHeroes.find_hero("Yosemite Sam"))
+    # teamOfHeroes.view_all_heroes()
     
 
 
