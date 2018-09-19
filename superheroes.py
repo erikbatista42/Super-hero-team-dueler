@@ -2,7 +2,6 @@ import random
 
 class Ability:
 
-
 	def __init__(self, name, attack_strength):
 		self.name = name
 		self.attack_strength = attack_strength
@@ -38,7 +37,7 @@ class Weapon(Ability):
 
 class Team(Hero):
 
-    def __init__(self, team_name):
+    def __init__(self,team_name):
         self.name = team_name
         self.heroes = list()
 
@@ -66,32 +65,38 @@ class Team(Hero):
     	for hero in self.heroes:
     		print("{0} is in {1}".format(hero.name, self.name))
 
-	def attack(self, other_team):
-        # This method should total our teams attack strength and call the defend() method on the rival team that is passed in.
-        # It should call add_kill() on each hero with the number of kills made.
+	# def attack(self, other_team):
+	# 	self.other_team = other_team
+    #     # This method should total our teams attack strength and call the defend() method on the rival team that is passed in.
+    #     # It should call add_kill() on each hero with the number of kills made.
 
-    def defend(self, damage_amt):
-		# This method should calculate our team's total defense.
-        #Any damage in excess of our team's total defense should be evenly distributed amongst all heroes with the deal_damage() method.
-		#Return number of heroes killed in attack.
-
-
-    def deal_damage(self, damage):
-   		#Divide the total damage amongst all heroes.
-        #Return the number of heros that died in attack.
-
-    def revive_heroes(self, health=100):
-        #This method should reset all heroes health to their
-        #original starting value.
+    # def defend(self, damage_amt):
+	# 	self.damage_amt = damage_amt
+	# 	# This method should calculate our team's total defense.
+    #     #Any damage in excess of our team's total defense should be evenly distributed amongst all heroes with the deal_damage() method.
+	# 	#Return number of heroes killed in attack.
 
 
-    def stats(self):
-    	# This method should print the ratio of kills/deaths for each member of the team to the screen. 
-		#This data must be output to the terminal.
+    # def deal_damage(self, damage):
+   	# 	#Divide the total damage amongst all heroes.
+    #     #Return the number of heros that died in attack.
+	# 	self.damage = damage
+
+    # def revive_heroes(self, health=100):
+	# 	self.health = health
+    #     #This method should reset all heroes health to their
+    #     #original starting value.
 
 
-    def update_kills(self):
-        #This method should update each hero when there is a team kill.
+    # def stats(self):
+	# 	print(123)
+    # 	# This method should print the ratio of kills/deaths for each member of the team to the screen. 
+	# 	#This data must be output to the terminal.
+
+
+    # def update_kills(self):
+	# 	self
+    #     #This method should update each hero when there is a team kill.
     	
         
 
@@ -110,11 +115,9 @@ if __name__ == "__main__":
     ability2 = Ability("Flying Hammer", 500)
     hero2.add_ability(ability2)
 
-
     hero3 = Hero("Yosemite Sam")
     ability3 = Ability("Lasso", 600)
     hero3.add_ability(ability3)
-
 
     teamOfHeroes = Team("Losers")
     print(teamOfHeroes.add_hero(hero1))
@@ -125,7 +128,6 @@ if __name__ == "__main__":
     #print(teamOfHeroes.remove_hero("Jabba")) # supposed to return 0
     print(teamOfHeroes.find_hero("Wonder Woman"))
     print(teamOfHeroes.find_hero("Yosemite Sam"))
-
     teamOfHeroes.view_all_heroes()
     
 
