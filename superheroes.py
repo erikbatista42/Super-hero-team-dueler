@@ -74,7 +74,12 @@ class Team(Hero):
         # This method should total our teams attack strength and call the defend() method on the rival team that is passed in.
         # It should call add_kill() on each hero with the number of kills made.
         self.other_team = other_team
-        print("attackkk")
+        attackVal = 0
+
+        for hero in self.heroes:
+            # print(hero.name)
+            attackVal += hero.attack()
+        print("Total team attack: " + str(attackVal))
 
     def defend(self, damage_amt):
         # This method should calculate our team's total defense.
@@ -105,51 +110,54 @@ if __name__ == "__main__":
 
     # Wonder Woman
     heroOne = Hero("Wonder Woman")
-    print(heroOne.name)
+    # print(heroOne.name)
     punchAbility = Ability("Punch", 500)
     heroOne.add_ability(punchAbility)
-    print("Wonder Woman is attacking:")
-    print(heroOne.attack())
+    # print("Wonder Woman is attacking:")
+    # print(heroOne.attack())
 
     # Superman
     heroTwo = Hero("Superman")
-    print(heroTwo.name)
+    # print(heroTwo.name)
     superPunch = Ability("Superman Punch", 700)
     heroTwo.add_ability(superPunch)
-    print("Superman is attacking:")
-    print(heroTwo.attack())
+    # print("Superman is attacking:")
+    # print(heroTwo.attack())
 
     # Batman
     heroThree = Hero("Batman")
-    print(heroThree.name)
+    # print(heroThree.name)
     headBumb = Ability("Head bumb", 500)
     heroThree.add_ability(headBumb)
-    print("Batman is attacking:")
-    print(heroThree.attack())
+    # print("Batman is attacking:")
+    # print(heroThree.attack())
 
     # Super Chicken
     heroFour = Hero("Super Chicken")
     flapWings = Ability("Flap wings", 8000)
     heroFour.add_ability(flapWings)
-    print("Super Chicken is attacking:")
-    print(heroFour.attack())
+    # print("Super Chicken is attacking:")
+    # print(heroFour.attack())
 
     # # Shotgun weapon
     weaponOne = Weapon("Shotgun", 1000)
 
-    print(weaponOne.name)
-    print(weaponOne.attack_strength)
-    print("Weapons is attacking:")
-    print(weaponOne.attack())
+    # print(weaponOne.name)
+    # print(weaponOne.attack_strength)
+    # print("Weapons is attacking:")
+    # print(weaponOne.attack())
 
     # Losers Team
     teamOne = Team("Losers")
     teamOne.add_hero(heroTwo)
     teamOne.add_hero(heroThree)
-    teamOne.view_all_heroes()
+    # teamOne.view_all_heroes()
 
     # Winners Team
     teamTwo = Team("Winners")
     teamTwo.add_hero(heroOne)
     teamTwo.add_hero(heroFour)
-    teamTwo.view_all_heroes()
+    # teamTwo.view_all_heroes()
+    # print("Trying to add all heroes attacks:")
+    # print(heroOne.attack() + heroTwo.attack())
+    teamTwo.attack(teamTwo)
