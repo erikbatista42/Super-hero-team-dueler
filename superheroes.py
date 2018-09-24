@@ -42,11 +42,14 @@ class Hero(Ability):
         self.kills = 0
 
     def defend(self):
-        """
-        This method should run the defend method on each piece of armor and calculate the total defense.
-
-        If the hero's health is 0, the hero is out of play and should return 0 defense points.
-        """
+        # This method should run the defend method on each piece of armor and calculate the total defense.
+        # If the hero's health is 0, the hero is out of play and should return 0 defense points.
+        print("armor list: ")
+        print(self.armors)
+        for heroArmors in self.armors:
+            print("defending armors:")
+            # print(heroArmors.defend())
+            # heroArmors.defend()
 
     def take_damage(self, damage_amt):
         """
@@ -57,17 +60,19 @@ class Hero(Ability):
         """
 
     def add_kill(self, num_kills):
-        """
-        This method should add the number of kills to self.kills
-        """
+        # This method should add the number of kills to self.kills
+        self.kills += num_kills
 
     def add_ability(self, ability):
         self.abilities.append(ability)
 
+    def add_armor(self, armor):
+        self.armors.append(armor)
+
     def attack(self):
         total = 0
-        for ab in self.abilities:
-            total += Ability.attack(ab)
+        for attack_with_abilities in self.abilities:
+            total += Ability.attack(attack_with_abilities)
         return total
 
 
@@ -117,7 +122,7 @@ class Team(Hero):
         for hero in self.heroes:
             # print(hero.name)
             totalAttackVal += hero.attack()
-        print("Total team attack: " + str(totalAttackVal))
+        print("Total team attack: {0} ".format(totalAttackVal))
 
         other_team.defend(totalAttackVal)
 
@@ -153,6 +158,9 @@ if __name__ == "__main__":
     # print(heroOne.name)
     punchAbility = Ability("Punch", 500)
     heroOne.add_ability(punchAbility)
+    lightArmor = Armor("light armor", 200)
+    heroOne.add_armor(lightArmor)
+    # print(heroOne.)
     # print("Wonder Woman is attacking:")
     # print(heroOne.attack())
 
@@ -161,8 +169,11 @@ if __name__ == "__main__":
     # print(heroTwo.name)
     superPunch = Ability("Superman Punch", 700)
     heroTwo.add_ability(superPunch)
+    mediumArmor = Armor("mediumArmor", 200)
+    heroTwo.add_armor(mediumArmor)
     # print("Superman is attacking:")
     # print(heroTwo.attack())
+    print(heroOne.defend())
 
     # Batman
     heroThree = Hero("Batman")
