@@ -17,6 +17,19 @@ class Ability:
         self.attack_strength = attack_strength
 
 
+class Armor:
+
+    def __init__(self, name, defense):
+        # Instantiate name and defense strength.
+        self.name = name
+        self.defense = defense
+
+    def defend(self):
+        # Return a random value between 0 and the
+        # Initialized defend strength.
+        defendRandomVal = random.randint(0, self.defense)
+
+
 class Hero(Ability):
 
     def __init__(self, name):
@@ -74,12 +87,14 @@ class Team(Hero):
         # This method should total our teams attack strength and call the defend() method on the rival team that is passed in.
         # It should call add_kill() on each hero with the number of kills made.
         self.other_team = other_team
-        attackVal = 0
+        totalAttackVal = 0
 
         for hero in self.heroes:
             # print(hero.name)
-            attackVal += hero.attack()
-        print("Total team attack: " + str(attackVal))
+            totalAttackVal += hero.attack()
+        print("Total team attack: " + str(totalAttackVal))
+
+        other_team.defend(totalAttackVal)
 
     def defend(self, damage_amt):
         # This method should calculate our team's total defense.
