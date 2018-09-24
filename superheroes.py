@@ -32,9 +32,34 @@ class Armor:
 
 class Hero(Ability):
 
-    def __init__(self, name):
+    def __init__(self, name, health=100):
         self.name = name
         self.abilities = list()
+        self.armors = list()
+        self.start_health = health
+        self.health = health
+        self.deaths = 0
+        self.kills = 0
+
+    def defend(self):
+        """
+        This method should run the defend method on each piece of armor and calculate the total defense.
+
+        If the hero's health is 0, the hero is out of play and should return 0 defense points.
+        """
+
+    def take_damage(self, damage_amt):
+        """
+        This method should subtract the damage amount from the
+        hero's health.
+
+        If the hero dies update number of deaths.
+        """
+
+    def add_kill(self, num_kills):
+        """
+        This method should add the number of kills to self.kills
+        """
 
     def add_ability(self, ability):
         self.abilities.append(ability)
