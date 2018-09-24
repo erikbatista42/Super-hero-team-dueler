@@ -176,26 +176,20 @@ class Arena:
         self.team_two = None
 
     def build_team_one(self):
-        """
-        This method should allow a user to build team one.
-        """
+        # This method should allow a user to build team one.
+        print(123)
 
     def build_team_two(self):
-        """
-        This method should allow user to build team two.
-        """
+        # This method should allow user to build team two.
+        print(123)
 
     def team_battle(self):
-        """
-        This method should continue to battle teams until
-        one or both teams are dead.
-        """
+        # This method should continue to battle teams until one or both teams are dead.
+        print(123)
 
     def show_stats(self):
-        """
-        This method should print out the battle statistics
-        including each heroes kill/death ratio.
-        """
+        # This method should print out the battle statistics including each heroes kill/death ratio.
+        print(123)
 
 
 if __name__ == "__main__":
