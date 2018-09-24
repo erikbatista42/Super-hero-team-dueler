@@ -52,12 +52,11 @@ class Hero(Ability):
             # heroArmors.defend()
 
     def take_damage(self, damage_amt):
-        """
-        This method should subtract the damage amount from the
-        hero's health.
-
-        If the hero dies update number of deaths.
-        """
+        # This method should subtract the damage amount from the hero's health.
+        # If the hero dies update number of deaths.
+        self.health = self.health - damage_amt
+        if self.health <= 0:
+            self.deaths += 1
 
     def add_kill(self, num_kills):
         # This method should add the number of kills to self.kills
