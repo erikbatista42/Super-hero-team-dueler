@@ -45,7 +45,7 @@ class Hero(Ability):
 
         # This method should run the defend method on each piece of armor and calculate the total defense.
         # If the hero's health is 0, the hero is out of play and should return 0 defense points.
-        print("armor list: ")
+        # print("armor list: ")
         # print(self.armors)
         if self.health == 0:
             return 0
@@ -60,7 +60,7 @@ class Hero(Ability):
     def add_kill(self, num_kills):
         # This method should add the number of kills to self.kills
         # self.kills += num_kills
-        print(123)
+        tempoVar = ""
 
     def add_ability(self, ability):
         self.abilities.append(ability)
@@ -133,7 +133,7 @@ class Team(Hero):
         defendVal = 0
         for hero in self.heroes:
             # defendVal += hero.defend()
-            print("")
+            tempoVar = ""
 
     def deal_damage(self, damage):
         # Divide the total damage amongst all heroes.
@@ -177,11 +177,41 @@ class Arena:
 
     def build_team_one(self):
         # This method should allow a user to build team one.
-        print(123)
+        print("TEAM ONE:")
+        # Wonder Woman
+        heroOne = Hero("Wonder Woman")
+        print("{0} is ready to fight: ".format(heroOne.name))
+        punchAbility = Ability("Punch", 500)
+        heroOne.add_ability(punchAbility)
+        lightArmor = Armor("light armor", 200)
+        heroOne.add_armor(lightArmor)
+        print(heroOne.name)
+
+        # Batman
+        heroTwo = Hero("Batman")
+        print("{0} is ready to fight: ".format(heroTwo.name))
+        headBumb = Ability("Head bumb", 500)
+        heroTwo.add_ability(headBumb)
+        print(heroThree.name)
 
     def build_team_two(self):
         # This method should allow user to build team two.
-        print(123)
+        print("TEAM TWO:")
+        # Superman
+        heroFour = Hero("Superman")
+        print("{0} is ready to fight: ".format(heroFour.name))
+        superPunch = Ability("Superman punch", 700)
+        heroFour.add_ability(superPunch)
+        mediumArmor = Armor("mediumArmor", 200)
+        heroFour.add_armor(mediumArmor)
+
+        # Super Chicken
+        heroFive = Hero("Super Chicken")
+        print("{0} is ready to fight: ".format(heroFive.name))
+        flapWings = Ability("Flap wings", 1200)
+        heroFive.add_ability(flapWings)
+        heavyArmor = Armor("heavy armor", 800)
+        heroFive.add_armor(heavyArmor)
 
     def team_battle(self):
         # This method should continue to battle teams until one or both teams are dead.
