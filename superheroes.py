@@ -115,12 +115,6 @@ class Team(Hero):
         return 0
 
     def find_hero(self, name):
-        # for hero in self.heroes:
-        #     if hero.name == name:
-        #         heroExists = "The hero '{0}' exists".format(hero.name)
-        #         return heroExists
-        #     else:
-        #         return "this hero doesn't exist"
         for index in range(len(self.heroes)):
             if self.heroes[index].name == name:
                 return self.heroes[index]
@@ -194,84 +188,53 @@ class Arena():
 
     def build_team_one(self):
         # This method should allow a user to build team one.
-        # print("TEAM ONE:")
-        # self.team_one = Team(input("What's team one going to be named?"))
-        # for i in range(self.team):
-        #     print("Hero number {0} ".format(i))
-        #     self.team_one.add_hero()
-        # This method should allow a user to build team one.
-        team_one = Team("Winners")
-        print("TEAM ONE:")
-        # Wonder Woman
-        heroOne = Hero("Wonder Woman")
-        team_one.add_hero(heroOne)
-        print("Superhero 1: '{0}' is ready to fight!".format(heroOne.name))
-        punchAbility = Ability("Punch", 500)
-        heroOne.add_ability(punchAbility)
-        # print(heroOne.abilities)
-        lightArmor = Armor("light armor", 200)
-        heroOne.add_armor(lightArmor)
+        print("PREPARE FOR BATTLE:")
+        self.team_one = Team(input("What's the first team going to be named? "))
 
-        # Batman
-        heroTwo = Hero("Batman")
-        team_one.add_hero(heroTwo)
-        print("Superhero 2: '{0}' is ready to fight! ".format(heroTwo.name))
-        headBumb = Ability("Head bumb", 500)
-        heroTwo.add_ability(headBumb)
-        # print(team_one.heroes)
+        teamOneHeroOne = Hero(input("What's your first hero in team {0} going to be named? ".format(self.team_one.name)))
+        teamOneHeroOne.add_ability(input("What ability will {0} have? ".format(teamOneHeroOne.name)))
+        mediumArmor = Armor("mediumArmor", 50)
+        teamOneHeroOne.add_armor(mediumArmor)
+        print("{0} is going go into a serious fight. We added armor so he now has +50 health".format(teamOneHeroOne.name))
+        teamOneHeroOneWeaponName = input("Let's get {0} a weapon. What weapon would you like the hero to have? ".format(teamOneHeroOne.name))
+        teamOneHeroOneWeaponAttackNum = random.randint(1, 40)
+        theWeapon = Weapon(teamOneHeroOneWeaponName, teamOneHeroOneWeaponAttackNum)
+        print("TEAM {0} IS READY FOR BATTLE!".format(self.team_one.name).upper())
+        print("_________________")
+        # teamOneheroTwo = Hero(input("What's your second hero in team {0} going to be named? ".format(self.team_one.name)))
 
     def build_team_two(self):
-        # This method should allow user to build team two.
-        print("")
-        print("TEAM TWO:")
-        # self.team_one = Team(input("What's team two going to be named?"))
-        # for i in range(self.team):
-        #     print("Hero number {0} ".format(i))
-        #     self.team_two.add_hero()
-        # Superman
-        heroFour = Hero("Superman")
-        print("Superhero1: '{0}' is ready to fight: ".format(heroFour.name))
-        superPunch = Ability("Superman punch", 700)
-        heroFour.add_ability(superPunch)
-        mediumArmor = Armor("mediumArmor", 200)
-        heroFour.add_armor(mediumArmor)
-        # print(heroFour)
-        # Super Chicken
-        heroFive = Hero("Super Chicken")
-        print("Superhero2: '{0}' is ready to fight: ".format(heroFive.name))
-        flapWings = Ability("Flap wings", 1200)
-        heroFive.add_ability(flapWings)
-        heavyArmor = Armor("heavy armor", 800)
-        heroFive.add_armor(heavyArmor)
+        print("Lets now build team two!")
+        self.team_two = Team(input("What's the first team going to be named? "))
+
+        teamTwoHeroOne = Hero(input("What's your first hero in team {0} going to be named? ".format(self.team_two.name)))
+        teamTwoHeroOne.add_ability(input("What ability will {0} have? ".format(teamTwoHeroOne.name)))
+        mediumArmor = Armor("mediumArmor", 50)
+        teamTwoHeroOne.add_armor(mediumArmor)
+        print("{0} is going go into a serious fight. We added armor so he now has +50 health".format(teamTwoHeroOne.name))
+        teamTwoHeroOneWeaponName = input("Let's get {0} a weapon. What weapon would you like the hero to have? ".format(teamTwoHeroOne.name))
+        teamTwoHeroOneWeaponAttackNum = random.randint(1, 40)
+        theWeapon = Weapon(teamTwoHeroOneWeaponName, teamTwoHeroOneWeaponAttackNum)
+        print("TEAM {0} IS READY FOR BATTLE!".format(self.team_two.name).upper())
 
     def team_battle(self):
+        print(" ")
+        print("BATTLE STARTING.............")
         # This method should continue to battle teams until one or both teams are dead.
         # battling = True
         # while battling == True:
         #     self.team_one.attack(self.team_two)
         #     self.team_two.attack(self.team_one)
-        pass
 
     def show_stats(self):
         # This method should print out the battle statistics including each heroes kill/death ratio.
-        pass
+        print("STATS:")
+        print("not yet available")
 
 
 if __name__ == "__main__":
     arena = Arena()
-    # arena.build_team_one()
-    # arena.build_team_two()
-    # arena.team_battle()
-    # arena.show_stats()
-    heroOneTeamOne = Hero("Jessica Jones", 100)
-    heroTwoTeamOne = Hero("Daredevil", 100)
-    teamWinners = Team("Team Winners")
-    teamWinners.add_hero(heroOneTeamOne)
-    teamWinners.add_hero(heroTwoTeamOne)
-    print(teamWinners.find_hero("Daredevil"))  # Fix print statement and check for other heroes not just the first one
-    teamWinners.view_all_heroes()
-
-    # team two
-    heroOneTeamTwo = Hero("batman", 100)
-    heroTwoTeamTwo = Hero("joker", 100)
-    # battle
+    arena.build_team_one()
+    arena.build_team_two()
+    arena.team_battle()
+    arena.show_stats()
