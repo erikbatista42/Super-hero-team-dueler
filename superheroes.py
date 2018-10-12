@@ -8,13 +8,15 @@ class Ability:
         self.attack_strength = attack_strength
 
     def attack(self):
-        highestAttackVal = 400
-        lowestAttackVal = highestAttackVal // 2
-        randomAttackVal = random.randint(lowestAttackVal, highestAttackVal)
-        return randomAttackVal
+        # highestAttackVal = 400
+        # lowestAttackVal = highestAttackVal // 2
+        # randomAttackVal = random.randint(lowestAttackVal, highestAttackVal)
+        # return randomAttackVal
+        random_int = random.randint(self.attack_strength // 2, self.attack_strength)
+        return random_int
 
-    def update_attack(self, attack_strength):
-        self.attack_strength = attack_strength
+    def update_attack(self, new_attack_strength):
+        self.attack_strength = new_attack_strength
 
 
 class Armor:
@@ -47,8 +49,19 @@ class Hero(Ability):
         # If the hero's health is 0, the hero is out of play and should return 0 defense points.
         # print("armor list: ")
         # print(self.armors)
+
+        # if self.health == 0:
+        #     return 0
+        total_defense = 0
+
         if self.health == 0:
             return 0
+
+        for armor in self.armors:
+            armor_defense = armor.defend()
+            total_defense += armor_defense
+
+        return total_defense
 
     def take_damage(self, damage_amt):
         # This method should subtract the damage amount from the hero's health.
@@ -59,8 +72,7 @@ class Hero(Ability):
 
     def add_kill(self, num_kills):
         # This method should add the number of kills to self.kills
-        # self.kills += num_kills
-        tempoVar = ""
+        self.kills += num_kills
 
     def add_ability(self, ability):
         self.abilities.append(ability)
@@ -103,10 +115,15 @@ class Team(Hero):
         return 0
 
     def find_hero(self, name):
-        for hero in self.heroes:
-            if hero.name == name:
-                retStr = "{0} exists".format(hero.name)
-                return retStr
+        # for hero in self.heroes:
+        #     if hero.name == name:
+        #         heroExists = "The hero '{0}' exists".format(hero.name)
+        #         return heroExists
+        #     else:
+        #         return "this hero doesn't exist"
+        for index in range(len(self.heroes)):
+            if self.heroes[index].name == name:
+                return self.heroes[index]
         return 0
 
     def view_all_heroes(self):
@@ -170,44 +187,58 @@ class Team(Hero):
         return self.teamKills
 
 
-class Arena:
+class Arena():
     def __init__(self):
         self.team_one = None
         self.team_two = None
 
     def build_team_one(self):
         # This method should allow a user to build team one.
+        # print("TEAM ONE:")
+        # self.team_one = Team(input("What's team one going to be named?"))
+        # for i in range(self.team):
+        #     print("Hero number {0} ".format(i))
+        #     self.team_one.add_hero()
+        # This method should allow a user to build team one.
+        team_one = Team("Winners")
         print("TEAM ONE:")
         # Wonder Woman
         heroOne = Hero("Wonder Woman")
-        print("{0} is ready to fight: ".format(heroOne.name))
+        team_one.add_hero(heroOne)
+        print("Superhero 1: '{0}' is ready to fight!".format(heroOne.name))
         punchAbility = Ability("Punch", 500)
         heroOne.add_ability(punchAbility)
+        # print(heroOne.abilities)
         lightArmor = Armor("light armor", 200)
         heroOne.add_armor(lightArmor)
-        print(heroOne.name)
 
         # Batman
         heroTwo = Hero("Batman")
-        print("{0} is ready to fight: ".format(heroTwo.name))
+        team_one.add_hero(heroTwo)
+        print("Superhero 2: '{0}' is ready to fight! ".format(heroTwo.name))
         headBumb = Ability("Head bumb", 500)
         heroTwo.add_ability(headBumb)
-        print(heroThree.name)
+        # print(team_one.heroes)
 
     def build_team_two(self):
         # This method should allow user to build team two.
+        print("")
         print("TEAM TWO:")
+        # self.team_one = Team(input("What's team two going to be named?"))
+        # for i in range(self.team):
+        #     print("Hero number {0} ".format(i))
+        #     self.team_two.add_hero()
         # Superman
         heroFour = Hero("Superman")
-        print("{0} is ready to fight: ".format(heroFour.name))
+        print("Superhero1: '{0}' is ready to fight: ".format(heroFour.name))
         superPunch = Ability("Superman punch", 700)
         heroFour.add_ability(superPunch)
         mediumArmor = Armor("mediumArmor", 200)
         heroFour.add_armor(mediumArmor)
-
+        # print(heroFour)
         # Super Chicken
         heroFive = Hero("Super Chicken")
-        print("{0} is ready to fight: ".format(heroFive.name))
+        print("Superhero2: '{0}' is ready to fight: ".format(heroFive.name))
         flapWings = Ability("Flap wings", 1200)
         heroFive.add_ability(flapWings)
         heavyArmor = Armor("heavy armor", 800)
@@ -215,71 +246,32 @@ class Arena:
 
     def team_battle(self):
         # This method should continue to battle teams until one or both teams are dead.
-        print(123)
+        # battling = True
+        # while battling == True:
+        #     self.team_one.attack(self.team_two)
+        #     self.team_two.attack(self.team_one)
+        pass
 
     def show_stats(self):
         # This method should print out the battle statistics including each heroes kill/death ratio.
-        print(123)
+        pass
 
 
 if __name__ == "__main__":
+    arena = Arena()
+    # arena.build_team_one()
+    # arena.build_team_two()
+    # arena.team_battle()
+    # arena.show_stats()
+    heroOneTeamOne = Hero("Jessica Jones", 100)
+    heroTwoTeamOne = Hero("Daredevil", 100)
+    teamWinners = Team("Team Winners")
+    teamWinners.add_hero(heroOneTeamOne)
+    teamWinners.add_hero(heroTwoTeamOne)
+    print(teamWinners.find_hero("Daredevil"))  # Fix print statement and check for other heroes not just the first one
+    teamWinners.view_all_heroes()
 
-    # Wonder Woman
-    heroOne = Hero("Wonder Woman")
-    # print(heroOne.name)
-    punchAbility = Ability("Punch", 500)
-    heroOne.add_ability(punchAbility)
-    lightArmor = Armor("light armor", 200)
-    heroOne.add_armor(lightArmor)
-    # print(heroOne.)
-    # print("Wonder Woman is attacking:")
-    # print(heroOne.attack())
-
-    # Superman
-    heroTwo = Hero("Superman")
-    # print(heroTwo.name)
-    superPunch = Ability("Superman Punch", 700)
-    heroTwo.add_ability(superPunch)
-    mediumArmor = Armor("mediumArmor", 200)
-    heroTwo.add_armor(mediumArmor)
-    # print("Superman is attacking:")
-    # print(heroTwo.attack())
-    print(heroOne.defend())
-
-    # Batman
-    heroThree = Hero("Batman")
-    # print(heroThree.name)
-    headBumb = Ability("Head bumb", 500)
-    heroThree.add_ability(headBumb)
-    # print("Batman is attacking:")
-    # print(heroThree.attack())
-
-    # Super Chicken
-    heroFour = Hero("Super Chicken")
-    flapWings = Ability("Flap wings", 8000)
-    heroFour.add_ability(flapWings)
-    # print("Super Chicken is attacking:")
-    # print(heroFour.attack())
-
-    # # Shotgun weapon
-    weaponOne = Weapon("Shotgun", 1000)
-
-    # print(weaponOne.name)
-    # print(weaponOne.attack_strength)
-    # print("Weapons is attacking:")
-    # print(weaponOne.attack())
-
-    # Losers Team
-    teamOne = Team("Losers")
-    teamOne.add_hero(heroTwo)
-    teamOne.add_hero(heroThree)
-    # teamOne.view_all_heroes()
-
-    # Winners Team
-    teamTwo = Team("Winners")
-    teamTwo.add_hero(heroOne)
-    teamTwo.add_hero(heroFour)
-    # teamTwo.view_all_heroes()
-    # print("Trying to add all heroes attacks:")
-    # print(heroOne.attack() + heroTwo.attack())
-    teamTwo.attack(teamTwo)
+    # team two
+    heroOneTeamTwo = Hero("batman", 100)
+    heroTwoTeamTwo = Hero("joker", 100)
+    # battle
