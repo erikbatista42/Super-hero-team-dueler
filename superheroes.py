@@ -43,7 +43,7 @@ class Hero:
         '''
         remainingHealth = self.currentHealth - self.damage
         self.currentHealth = remainingHealth
-        print(self.currentHealth)
+        print("Current health: {}".format(self.currentHealth))
 
     def isAlive(self):
         '''
@@ -62,15 +62,37 @@ class Hero:
         - Loop that both superheroes fight each other until someone dies
         '''
         while hero.currentHealth > 0 or opponent.currentHealth > 0:
-            # hero attack opponent
-            # opponent takes damage and opponent's health decreases
+            # Chunk 1
+            '''
+            set opponent as a hero - so he can have hero methods
+            so when they call hero.fight(opponent)
+                    fight takes in an opponent object
 
+            '''
 
-            # opponent attacks hero
-            # hero takes damage and hero's health decreases
+            # Chunk 2
+            '''
+            hero attacks opponent + opponent takes damage
+            '''
+            heroAttack = hero.attack(opponent)
+            opponent.takeDamage(heroAttack)
 
+            # Chunk 3
+            '''
+            opponent attacks hero + hero takes damage
+            '''
+            opponentAttack = opponent.attack(hero)
+            hero.takeDamage(opponentAttack)
 
-            print("{} died".fomat(hero.name)) # print heroe's death when he dies
+            # Chunk 4
+            '''
+            print who died - the opponent or the hero
+            '''
+            if hero.currentHealth < 0:
+                print("{} died".format(hero.name))
+            else:
+                print("{} died".format(opponent.name))
+
 
 
 class Ability:
@@ -92,4 +114,8 @@ class Ability:
 
 
 if __name__ == "__main__":
-    heroOne = Hero()
+    superMan = Hero("Superman")
+    print("ok")
+
+    batman = Hero("Batman")
+
