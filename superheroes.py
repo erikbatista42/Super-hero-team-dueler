@@ -1,5 +1,9 @@
+import random
+
+
 class Hero:
     def __init__(self, name, startingHealth=100):
+
         '''
         Initialize these values as instance variables:
         (Some of these values are passed in above, others will need to be set at a starting value.)
@@ -8,14 +12,14 @@ class Hero:
         starting_health:
         current_health:
          '''
-         self.name = name
-         self.startingHealth = startingHealth
-         self.currentHealth = startingHealth
-         self.abilities = list()
+        self.name = name
+        self.startingHealth = startingHealth
+        self.currentHealth = startingHealth
+        self.abilities = list()
 
     def addAbility(self, ability):
         ''' Add ability to abilities list '''
-        pass
+        ability.append(self.abilities)
 
     def attack(self):
         '''
@@ -25,14 +29,21 @@ class Hero:
         on every ability in self.abilities and
         return the total.
         '''
-        pass
+        totalDamage = 0
+        for ability in self.abilities:
+            totalDamage += ability.attack()
+        return totalDamage
+
+
 
     def takeDamage(self, damage):
         '''
         This method should update self.current_health
         with the damage that is passed in.
         '''
-        pass
+        remainingHealth = self.currentHealth - self.damage
+        self.currentHealth = remainingHealth
+        print(self.currentHealth)
 
     def isAlive(self):
         '''
@@ -40,13 +51,27 @@ class Hero:
         return true if the hero is alive
         or false if they are not.
         '''
-        pass
+        if hero.isAlive:
+            return True
+        else:
+            return False
 
-    def fight(self, opponent):
+    def fight(self, opponent): # **** #
         '''
         Runs a loop to attack the opponent until someone dies.
+        - Loop that both superheroes fight each other until someone dies
         '''
-        pass
+        while hero.currentHealth > 0 or opponent.currentHealth > 0:
+            # hero attack opponent
+            # opponent takes damage and opponent's health decreases
+
+
+            # opponent attacks hero
+            # hero takes damage and hero's health decreases
+
+
+            print("{} died".fomat(hero.name)) # print heroe's death when he dies
+
 
 class Ability:
     def __init__(self, name, maxDamage):
@@ -54,17 +79,17 @@ class Ability:
         Initialize the values passed into this
         method as instance variables.
          '''
-        pass
+        self.name = name
+        self.maxDamage = maxDamage
 
     def attack(self):
         '''
         Return a random attack value
         between 0 and max_damage.
         '''
-        pass
+        randomAttackValue = random.randint(0, self.maxDamage)
+        return randomAttackValue
 
 
 if __name__ == "__main__":
-    # If you run this file from the terminal
-    # this block is executed.
-    pass
+    heroOne = Hero()
