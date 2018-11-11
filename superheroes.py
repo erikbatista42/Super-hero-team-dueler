@@ -17,7 +17,7 @@ class Hero:
         self.currentHealth = startingHealth
         self.abilities = list()
 
-    def addAbility(self, ability):
+    def add_ability(self, ability):
         ''' Add ability to abilities list '''
         self.abilities.append(ability)
 
@@ -82,20 +82,13 @@ class Hero:
 
 class Ability:
     def __init__(self, name, maxDamage):
-        '''
-        Initialize the values passed into this
-        method as instance variables.
-         '''
         self.name = name
         self.maxDamage = maxDamage
 
     def attack(self):
-        '''
-        Return a random attack value
-        between 0 and max_damage.
-        '''
-        randomAttackValue = random.randint(0, self.maxDamage)
-        return randomAttackValue
+        # Return a random attack value between 0 and max_damage.
+        maxDamageRandomAttackValue = random.randint(0, self.maxDamage)
+        return maxDamageRandomAttackValue
 
 
 class Weapon(Ability):
