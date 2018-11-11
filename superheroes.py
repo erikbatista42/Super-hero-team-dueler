@@ -19,7 +19,7 @@ class Hero:
 
     def addAbility(self, ability):
         ''' Add ability to abilities list '''
-        ability.append(self.abilities)
+        self.abilities.append(ability)
 
     def attack(self):
         '''
@@ -29,11 +29,11 @@ class Hero:
         on every ability in self.abilities and
         return the total.
         '''
+        # adds all abilities together to attack
         totalDamage = 0
         for ability in self.abilities:
             totalDamage += ability.attack()
         return totalDamage
-
 
 
     def takeDamage(self, damage):
@@ -41,9 +41,9 @@ class Hero:
         This method should update self.current_health
         with the damage that is passed in.
         '''
-        remainingHealth = self.currentHealth - self.damage
+        remainingHealth = self.currentHealth - damage
         self.currentHealth = remainingHealth
-        print("Current health: {}".format(self.currentHealth))
+        # print("Current health: {}".format(self.currentHealth))
 
     def isAlive(self):
         '''
@@ -51,48 +51,33 @@ class Hero:
         return true if the hero is alive
         or false if they are not.
         '''
-        if hero.isAlive:
+        if self.currentHealth > 0:
             return True
         else:
             return False
+
 
     def fight(self, opponent): # **** #
         '''
         Runs a loop to attack the opponent until someone dies.
         - Loop that both superheroes fight each other until someone dies
         '''
-        while hero.currentHealth > 0 or opponent.currentHealth > 0:
-            # Chunk 1
-            '''
-            set opponent as a hero - so he can have hero methods
-            so when they call hero.fight(opponent)
-                    fight takes in an opponent object
+        while self.isAlive() or opponent.isAlive():
 
-            '''
-
-            # Chunk 2
-            '''
-            hero attacks opponent + opponent takes damage
-            '''
-            heroAttack = hero.attack(opponent)
+            heroAttack = self.attack()
             opponent.takeDamage(heroAttack)
+            # print("{} currentHealth: {}".format(opponent.name, opponent.currentHealth))
 
-            # Chunk 3
-            '''
-            opponent attacks hero + hero takes damage
-            '''
-            opponentAttack = opponent.attack(hero)
-            hero.takeDamage(opponentAttack)
+            opponentAttack = opponent.attack()
+            self.takeDamage(opponentAttack)
+            # print("{} currentHealth: {}".format(self.name, self.currentHealth))
 
-            # Chunk 4
-            '''
-            print who died - the opponent or the hero
-            '''
-            if hero.currentHealth < 0:
-                print("{} died".format(hero.name))
-            else:
-                print("{} died".format(opponent.name))
-
+        if self.isAlive() == False:
+            print("{} died".format(self.name))
+        elif opponent.isAlive() == False:
+            print("{} died".format(opponent.name))
+        else:
+            print("No one died...")
 
 
 class Ability:
@@ -113,9 +98,65 @@ class Ability:
         return randomAttackValue
 
 
-if __name__ == "__main__":
-    superMan = Hero("Superman")
-    print("ok")
+class Weapon(Ability):
+#returns random value between maxDamage & 1/2 of maxDamage
+    def attack(self):
+        randomValue = random.randint(self.maxDamage, self.maxDamage // 2)
+        return randomValue
 
-    batman = Hero("Batman")
+
+class Team:
+    def init(self, team_name):
+        '''Instantiate resources.'''
+        self.name = team_name
+        self.heroes = list()
+
+    def add_hero(self, Hero):
+        '''Add Hero object to heroes list.'''
+        self.heroes.append(Hero)
+
+    def remove_hero(self, name):
+        '''
+        Remove hero from heroes list.
+        If Hero isn't found return 0.
+        '''
+        if name in self.heroes:
+            self.heroes.remove(name)
+        else:
+            return 0
+
+    def view_all_heroes(self):
+        '''Print out all heroes to the console.'''
+        for hero in heroes:
+            print(hero.name)
+
+
+if __name__ == "__main__":
+    # superMan = Hero("Superman")
+    # superManPunch = Ability("superman punch", 30)
+    # superMan.addAbility(superManPunch)
+
+    # batman = Hero("Batman")
+    # kick = Ability("kick", 10)
+    # batman.addAbility(kick)
+
+
+    # superMan.fight(batman)
+    hero = Hero("Wonder Woman")
+    print(hero.attack()) # always 0 because has no abilities
+
+    ability = Ability("Divine Speed", 30)
+    hero.addAbility(ability)
+    print(hero.attack()) # should be 1 - AbilityNum
+
+    new_ability = Ability("Super Human Strength", 30)
+    hero.addAbility(new_ability)
+    print(hero.attack()) # should be 1 - AbilityNum
+
+    hero2 = Hero("Jodie Foster")
+    ability2 = Ability("Science", 800)
+    hero2.addAbility(ability2)
+    # print(hero2.attack())
+
+    hero.fight(hero2)
 
