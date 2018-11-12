@@ -81,24 +81,27 @@ class Hero:
 
 
 class Ability:
-    def __init__(self, name, maxDamage):
+    def __init__(self, name, attack_strength):
+        ''' Initialize starting values '''
         self.name = name
-        self.maxDamage = maxDamage
+        self.attack_strength = attack_strength
 
     def attack(self):
-        # Return a random attack value between 0 and max_damage.
-        maxDamageRandomAttackValue = random.randint(0, self.maxDamage)
-        return maxDamageRandomAttackValue
+        '''
+         Return attack value
+         between 0 and the full attack.
+         '''
+        randomAttackVal = random.randint(0, self.attack_strength)
+        return randomAttackVal
 
-    def update_attack(self, newAttack):
-        newAttack = self.maxDamage = newAttack
-        return newAttack
+    def update_attack(self, new_attack_strength):
+        self.attack_strength = new_attack_strength
 
 
 class Weapon(Ability):
 #returns random value between maxDamage & 1/2 of maxDamage
     def attack(self):
-        randomValue = random.randint(self.maxDamage, self.maxDamage // 2)
+        randomValue = random.randint(self.attack_strength, self.attack_strength // 2)
         return randomValue
 
 
