@@ -90,6 +90,10 @@ class Ability:
         maxDamageRandomAttackValue = random.randint(0, self.maxDamage)
         return maxDamageRandomAttackValue
 
+    def update_attack(self, newAttack):
+        newAttack = self.maxDamage = newAttack
+        return newAttack
+
 
 class Weapon(Ability):
 #returns random value between maxDamage & 1/2 of maxDamage
@@ -99,14 +103,15 @@ class Weapon(Ability):
 
 
 class Team:
-    def init(self, team_name):
+    def __init__(self, team_name):
         '''Instantiate resources.'''
-        self.name = team_name
+        self.team_name = team_name
         self.heroes = list()
 
     def add_hero(self, Hero):
         '''Add Hero object to heroes list.'''
         self.heroes.append(Hero)
+
 
     def remove_hero(self, name):
         '''
@@ -120,8 +125,9 @@ class Team:
 
     def view_all_heroes(self):
         '''Print out all heroes to the console.'''
-        for hero in heroes:
+        for hero in self.heroes:
             print(hero.name)
+
 
 
 if __name__ == "__main__":
@@ -139,17 +145,24 @@ if __name__ == "__main__":
     print(hero.attack()) # always 0 because has no abilities
 
     ability = Ability("Divine Speed", 30)
-    hero.addAbility(ability)
+    hero.add_ability(ability)
     print(hero.attack()) # should be 1 - AbilityNum
 
     new_ability = Ability("Super Human Strength", 30)
-    hero.addAbility(new_ability)
+    hero.add_ability(new_ability)
     print(hero.attack()) # should be 1 - AbilityNum
 
     hero2 = Hero("Jodie Foster")
     ability2 = Ability("Science", 800)
-    hero2.addAbility(ability2)
+    hero2.add_ability(ability2)
     # print(hero2.attack())
 
-    hero.fight(hero2)
+    # hero.fight(hero2)
+    teamOne = Team("losers")
+    teamOne.add_hero(hero)
+    teamOne.add_hero(hero2)
+    teamOne.remove_hero(hero)
+    teamOne.view_all_heroes()
+
+    # teamTwo = Team("winners")
 
