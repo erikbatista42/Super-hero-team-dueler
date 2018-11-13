@@ -62,7 +62,7 @@ class Hero:
         Runs a loop to attack the opponent until someone dies.
         - Loop that both superheroes fight each other until someone dies
         '''
-        while self.isAlive() or opponent.isAlive():
+        while self.isAlive() and opponent.isAlive():
 
             heroAttack = self.attack()
             opponent.takeDamage(heroAttack)
@@ -95,7 +95,7 @@ class Ability:
         return randomAttackVal
 
     def update_attack(self, new_attack_strength):
-        self.attack_strength = new_attack_strength
+        return self.randrange(attack_strength, new_attack_strength)
 
 
 class Weapon(Ability):
@@ -156,16 +156,16 @@ if __name__ == "__main__":
     print(hero.attack()) # should be 1 - AbilityNum
 
     hero2 = Hero("Jodie Foster")
-    ability2 = Ability("Science", 800)
+    ability2 = Ability("Science", 2)
     hero2.add_ability(ability2)
     # print(hero2.attack())
 
-    # hero.fight(hero2)
-    teamOne = Team("losers")
-    teamOne.add_hero(hero)
-    teamOne.add_hero(hero2)
-    teamOne.remove_hero(hero)
-    teamOne.view_all_heroes()
+    hero.fight(hero2)
+    # teamOne = Team("losers")
+    # teamOne.add_hero(hero)
+    # teamOne.add_hero(hero2)
+    # teamOne.remove_hero(hero)
+    # teamOne.view_all_heroes()
 
     # teamTwo = Team("winners")
 
