@@ -2,7 +2,7 @@ import random
 
 
 class Hero:
-    def __init__(self, name, startingHealth=100):
+    def __init__(self, name, health=100):
 
         '''
         Initialize these values as instance variables:
@@ -13,8 +13,7 @@ class Hero:
         current_health:
          '''
         self.name = name
-        self.startingHealth = startingHealth
-        self.currentHealth = startingHealth
+        self.health = health
         self.abilities = list()
         self.armors = list()
         self.deaths = 0
@@ -49,8 +48,8 @@ class Hero:
         '''
         Refactor this method to use the new defend method and to update the number of deaths if the hero dies in the attack.
         '''
-        remainingHealth = self.currentHealth - damage
-        self.currentHealth = remainingHealth
+        remainingHealth = self.health - damage
+        self.health = remainingHealth
 
 
     def defend(self):
@@ -59,22 +58,22 @@ class Hero:
 
         If the hero's health is 0, the hero is out of play and should return 0 defense points.
         '''
-        pass
 
-    def add_kill(self, num_kills):
-        '''
-        This method should add the number of kills to self.kills
-        '''
-        pass
+        # This method should run the defend method on each piece of armor
+        # and calculate the total defense.
+        # If the hero's health is 0, the hero is out of play and should return 0 defense points.
+
+        for armor in armors:
+            armor.defend()
+
+        if self.health == 0:
+            #  hero is out of play
+            # and should return 0 defense points.
 
 
-    def isAlive(self):
-        '''
-        This function will
-        return true if the hero is alive
-        or false if they are not.
-        '''
-        if self.currentHealth > 0:
+    def is_alive(self):
+    #This function will return true if the hero is alive or false if they are not.
+        if self.health > 0:
             return True
         else:
             return False
@@ -90,7 +89,7 @@ class Hero:
         Refactor this method to update the number of kills the hero has when the opponent dies.
         '''
 
-        while self.isAlive() and opponent.isAlive():
+        while self.is_alive() and opponent.is_alive():
 
             heroAttack = self.attack()
             opponent.takeDamage(heroAttack)
@@ -100,15 +99,23 @@ class Hero:
             self.takeDamage(opponentAttack)
             # print("{} currentHealth: {}".format(self.name, self.currentHealth))
 
-        if self.isAlive() == False:
+        if self.is_alive() == False:
             print("{} died".format(self.name))
-        elif opponent.isAlive() == False:
+            self.add_kill(1)
+        elif opponent.is_alive() == False:
             print("{} died".format(opponent.name))
-        else:
-            print("No one died...")
+            opponent.add_kill(1)
+
+    def add_kill(self, num_kills):
+        '''
+        This method should add the number of kills to self.kills
+        '''
+        self.kills += num_kills
 
 
 class Ability:
+
+
     def __init__(self, name, attack_strength):
         ''' Initialize starting values '''
         self.name = name
@@ -123,7 +130,8 @@ class Ability:
         return randomAttackVal
 
     def update_attack(self, new_attack_strength):
-        return self.randrange(attack_strength, new_attack_strength)
+        newAttackStrengthVal = self.randrange(attack_strength, new_attack_strength)
+        return newAttackStrengthVal
 
 
 class Weapon(Ability):
@@ -159,8 +167,30 @@ class Team:
         for hero in self.heroes:
             print(hero.name)
 
-        # return self.heroes
 
+    def attack(self, other_team):
+        # randomly select a living hero from each team
+        # have them fight until one or both teams have no surviving heroes
+
+        # Hint: Use the fight method in the Hero class.
+
+    def revive_heroes(self, health=100):
+        '''
+        This method should reset all heroes health to their
+        original starting value.
+        '''
+        for hero in heroes:
+            hero.health = health
+
+    def stats(self):
+        '''
+        This method should print the ratio of kills/deaths for each member of the team to the screen.
+
+        This data must be output to the console.
+        '''
+        for hero in team.heroes:
+            print("{} kills: {}".format(hero.name,hero.kills))
+            print("{} deaths: {}".format(hero.name,hero.deaths))
 
 class Armor:
     def __init__(self, name, max_block):
