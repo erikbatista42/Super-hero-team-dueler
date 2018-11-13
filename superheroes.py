@@ -16,6 +16,9 @@ class Hero:
         self.startingHealth = startingHealth
         self.currentHealth = startingHealth
         self.abilities = list()
+        self.armors = list()
+        self.deaths = 0
+        self.kills = 0
 
     def add_ability(self, ability):
         ''' Add ability to abilities list '''
@@ -41,9 +44,29 @@ class Hero:
         This method should update self.current_health
         with the damage that is passed in.
         '''
+
+        # REFACTOR INSTRUCTIONS
+        '''
+        Refactor this method to use the new defend method and to update the number of deaths if the hero dies in the attack.
+        '''
         remainingHealth = self.currentHealth - damage
         self.currentHealth = remainingHealth
-        # print("Current health: {}".format(self.currentHealth))
+
+
+    def defend(self):
+        '''
+        This method should run the defend method on each piece of armor and calculate the total defense.
+
+        If the hero's health is 0, the hero is out of play and should return 0 defense points.
+        '''
+        pass
+
+    def add_kill(self, num_kills):
+        '''
+        This method should add the number of kills to self.kills
+        '''
+        pass
+
 
     def isAlive(self):
         '''
@@ -62,6 +85,11 @@ class Hero:
         Runs a loop to attack the opponent until someone dies.
         - Loop that both superheroes fight each other until someone dies
         '''
+
+        '''
+        Refactor this method to update the number of kills the hero has when the opponent dies.
+        '''
+
         while self.isAlive() and opponent.isAlive():
 
             heroAttack = self.attack()
