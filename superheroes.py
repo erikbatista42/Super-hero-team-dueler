@@ -131,6 +131,22 @@ class Team:
         for hero in self.heroes:
             print(hero.name)
 
+        # return self.heroes
+
+
+class Armor:
+    def __init__(self, name, max_block):
+        '''Instantiate name and defense strength.'''
+        self.name = name
+        self.max_block = max_block
+
+    def block(self):
+        '''
+        Return a random value between 0 and the
+        initialized max_block strength.
+        '''
+        randomValue = random.randint(0, self.max_block)
+        return randomValue
 
 
 if __name__ == "__main__":
@@ -145,27 +161,29 @@ if __name__ == "__main__":
 
     # superMan.fight(batman)
     hero = Hero("Wonder Woman")
-    print(hero.attack()) # always 0 because has no abilities
+    # print(hero.attack()) # always 0 because has no abilities
 
     ability = Ability("Divine Speed", 30)
     hero.add_ability(ability)
-    print(hero.attack()) # should be 1 - AbilityNum
+    # print(hero.attack()) # should be 1 - AbilityNum
 
     new_ability = Ability("Super Human Strength", 30)
     hero.add_ability(new_ability)
-    print(hero.attack()) # should be 1 - AbilityNum
+    # print(hero.attack()) # should be 1 - AbilityNum
 
     hero2 = Hero("Jodie Foster")
-    ability2 = Ability("Science", 2)
+    ability2 = Ability("Science", 20)
+    mediumArmor = Armor("Medium Armor", 400)
     hero2.add_ability(ability2)
     # print(hero2.attack())
 
     hero.fight(hero2)
-    # teamOne = Team("losers")
-    # teamOne.add_hero(hero)
-    # teamOne.add_hero(hero2)
+    teamOne = Team("losers")
+    teamOne.add_hero(hero)
+    teamOne.add_hero(hero2)
     # teamOne.remove_hero(hero)
     # teamOne.view_all_heroes()
 
-    # teamTwo = Team("winners")
+
+    teamTwo = Team("winners")
 

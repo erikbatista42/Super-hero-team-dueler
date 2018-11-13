@@ -17,3 +17,17 @@ hobbes = Tiger("Hobbes")
 # print("#{name} is {0} years old".format( hobbes.age))
 print(hobbes.favoriteFood)
 
+
+# fight method
+
+class Hero:
+    def fight(self, opponent):
+        '''Runs a loop to attack oppponent until someone dies'''
+        while self.is_alive() or opponent.is_alive():
+
+
+
+
+batman = Hero("batman")
+wonderWoman = Hero("wonder Woman")
+
