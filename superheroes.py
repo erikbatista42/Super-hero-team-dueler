@@ -69,6 +69,7 @@ class Hero:
         if self.health == 0:
             #  hero is out of play
             # and should return 0 defense points.
+            pass
 
 
     def is_alive(self):
@@ -169,10 +170,17 @@ class Team:
 
 
     def attack(self, other_team):
-        # randomly select a living hero from each team
+        # randomly select a living hero from each √
         # have them fight until one or both teams have no surviving heroes
 
         # Hint: Use the fight method in the Hero class.
+        randomElement = random.SystemRandom()
+
+        randomHero = randomElement.choice(self.heroes)
+        other_team_random_hero = randomElement.choice(other_team.heroes)
+
+
+
 
     def revive_heroes(self, health=100):
         '''
