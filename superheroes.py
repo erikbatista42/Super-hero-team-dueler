@@ -132,16 +132,15 @@ class Ability:
 
 
 class Weapon(Ability):
-#returns random value between maxDamage & 1/2 of maxDamage
     def attack(self):
-        randomValue = random.randint(self.attack_strength, self.attack_strength // 2)
+        randomValue = random.randint(self.attack_strength // 2, self.attack_strength)
         return randomValue
 
 
 class Team:
-    def __init__(self, team_name):
+    def __init__(self, name):
         '''Instantiate resources.'''
-        self.team_name = team_name
+        self.name = name
         self.heroes = list()
 
     def add_hero(self, Hero):
@@ -154,10 +153,13 @@ class Team:
         Remove hero from heroes list.
         If Hero isn't found return 0.
         '''
-        if name in self.heroes:
-            self.heroes.remove(name)
-        else:
-            return 0
+        for hero in self.heroes:
+            if hero.name == name:
+                indexOfHero = self.heroes.index(hero)
+                del self.heroes[indexOfHero]
+            else:
+                return 0
+
 
     def view_all_heroes(self):
         '''Print out all heroes to the console.'''
@@ -193,8 +195,10 @@ class Team:
         This data must be output to the console.
         '''
         for hero in team.heroes:
-            print("{} kills: {}".format(hero.name,hero.kills))
-            print("{} deaths: {}".format(hero.name,hero.deaths))
+            # print("{} kills: {}".format(hero.name,hero.kills))
+            # print("{} deaths: {}".format(hero.name,hero.deaths))
+            kdr = hero.kills / hero.deaths
+            print("{}'s K/D: {}".format(hero.name, dkr))
 
 class Armor:
     def __init__(self, name, max_block):
@@ -239,13 +243,15 @@ if __name__ == "__main__":
     hero2.add_ability(ability2)
     # print(hero2.attack())
 
-    hero.fight(hero2)
+    # hero.fight(hero2)
     teamOne = Team("losers")
     teamOne.add_hero(hero)
     teamOne.add_hero(hero2)
-    # teamOne.remove_hero(hero)
-    # teamOne.view_all_heroes()
-
+    teamOne.heroes[0].name = "Michael Jackson"
+    teamOne.remove_hero("Michael Jackson")
+    print("all heroes:")
+    teamOne.view_all_heroes()
+    # print(teamOne.heroes[0].name)
 
     teamTwo = Team("winners")
 
