@@ -157,8 +157,9 @@ class Team:
             if hero.name == name:
                 indexOfHero = self.heroes.index(hero)
                 del self.heroes[indexOfHero]
-            else:
-                return 0
+                return
+        # did not find hero so give an error value
+        return 0
 
 
     def view_all_heroes(self):
