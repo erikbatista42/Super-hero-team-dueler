@@ -48,28 +48,24 @@ class Hero:
         '''
         Refactor this method to use the new defend method and to update the number of deaths if the hero dies in the attack.
         '''
-        remainingHealth = self.health - damage
-        self.health = remainingHealth
+        self.health -= damage - self.defend()
 
 
     def defend(self):
-        '''
-        This method should run the defend method on each piece of armor and calculate the total defense.
-
-        If the hero's health is 0, the hero is out of play and should return 0 defense points.
-        '''
-
         # This method should run the defend method on each piece of armor
         # and calculate the total defense.
         # If the hero's health is 0, the hero is out of play and should return 0 defense points.
 
-        for armor in armors:
-            armor.defend()
+        totalDefense = 0
+        for armor in self.armors:
+            totalDefense += armor.block()
 
-        if self.health == 0:
+        if self.health <= 0:
             #  hero is out of play
             # and should return 0 defense points.
-            pass
+            self.deaths += 1
+            totalDefense = 0
+        return totalDefense
 
 
     def is_alive(self):
