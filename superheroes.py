@@ -15,6 +15,7 @@ class Hero:
         self.name = name
         self.health = health
         self.starting_health = health
+        self.current_health = health
         self.abilities = list()
         self.armors = list()
         self.deaths = 0
