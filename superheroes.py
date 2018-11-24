@@ -17,9 +17,14 @@ class Hero:
         self.starting_health = health
         self.current_health = health
         self.abilities = list()
+
         self.armors = list()
         self.deaths = 0
         self.kills = 0
+
+    def add_armor(self, armor):
+        ''' Add armor to armors list.'''
+        self.armors.append(armor)
 
     def add_ability(self, ability):
         ''' Add ability to abilities list '''
