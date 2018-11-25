@@ -7,16 +7,19 @@ class Hero:
         self.health = health
         self.starting_health = health
         self.current_health = health
-        self.abilities = list()
+        self.abilities = list() # list of abilities and weapons
         self.armors = list()
         self.deaths = 0
         self.kills = 0
 
-    def add_armor(self, armor):
-        self.armors.append(armor)
+    def add_weapon(self, weapon):
+        self.abilities.append(weapon)
 
     def add_ability(self, ability):
         self.abilities.append(ability)
+
+    def add_armor(self, armor):
+        self.armors.append(armor)
 
     def attack(self):
         ''' adds all abilities together to attack '''
@@ -48,6 +51,8 @@ class Hero:
         else:
             return False
 
+    def add_kill(self, num_kills):
+        self.kills += num_kills
 
     def fight(self, opponent):
 
@@ -69,8 +74,7 @@ class Hero:
                 opponent.deaths += 1
 
 
-    def add_kill(self, num_kills):
-        self.kills += num_kills
+
 
 
 class Ability:
@@ -104,7 +108,6 @@ class Team:
 
     def add_hero(self, Hero):
         self.heroes.append(Hero)
-
 
     def remove_hero(self, name):
 
@@ -143,10 +146,10 @@ class Team:
             hero.health = health
 
     def stats(self):
-        ''' Prints Kill/Death Ratio '''
+        ''' Prints Kills/Deaths ratio for each hero'''
         for hero in team.heroes:
             kdr = hero.kills / hero.deaths
-            print("{}'s K/D: {}".format(hero.name, dkr))
+            print("{}'s K/D: {}".format(hero.name, kdr))
 
 
 class Armor:
