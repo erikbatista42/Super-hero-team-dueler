@@ -45,7 +45,7 @@ class Hero:
         return totalDamage
 
 
-    def takeDamage(self, damage):
+    def take_damage(self, damage):
         '''
         This method should update self.current_health
         with the damage that is passed in.
@@ -76,14 +76,14 @@ class Hero:
 
 
     def is_alive(self):
-    #This function will return true if the hero is alive or false if they are not.
+    # This function will return true if the hero is alive or false if they are not.
         if self.health > 0:
             return True
         else:
             return False
 
 
-    def fight(self, opponent): # **** #
+    def fight(self, opponent):
         '''
         Runs a loop to attack the opponent until someone dies.
         - Loop that both superheroes fight each other until someone dies
@@ -96,19 +96,20 @@ class Hero:
         while self.is_alive() and opponent.is_alive():
 
             heroAttack = self.attack()
-            opponent.takeDamage(heroAttack)
+            opponent.take_damage(heroAttack)
             # print("{} currentHealth: {}".format(opponent.name, opponent.currentHealth))
 
             opponentAttack = opponent.attack()
-            self.takeDamage(opponentAttack)
+            self.take_damage(opponentAttack)
             # print("{} currentHealth: {}".format(self.name, self.currentHealth))
 
-        if self.is_alive() == False:
-            print("{} died".format(self.name))
-            self.add_kill(1)
-        elif opponent.is_alive() == False:
-            print("{} died".format(opponent.name))
-            opponent.add_kill(1)
+            if self.is_alive() == False:
+                print("{} diedss".format(self.name))
+                opponent.add_kill(1)
+            elif opponent.is_alive() == False:
+                # print("{} dieddf".format(opponent.name))
+                self.add_kill(1)
+        print(self.kills)
 
     def add_kill(self, num_kills):
         '''
@@ -177,13 +178,27 @@ class Team:
 
     def attack(self, other_team):
         # randomly select a living hero from each √
-        # have them fight until one or both teams have no surviving heroes
-
-        # Hint: Use the fight method in the Hero class.
         randomElement = random.SystemRandom()
 
         randomHero = randomElement.choice(self.heroes)
         other_team_random_hero = randomElement.choice(other_team.heroes)
+
+        # have them fight until one or both teams have no surviving heroes
+        # Hint: Use the fight method in the Hero class.
+
+        # while until one or both teams have no surviving heroes
+        while other_team_random_hero.current_health > 0:
+            randomHero.fight(other_team_random_hero)
+            other_team_random_hero.current_health -= 1
+            # print(other_team_random_hero.current_health)
+
+
+            # hero.current_health -=
+
+        # killstreak = other_team.defend(offense)
+
+        # for hero in self.heroes:
+        #     hero.add_kill(killstreak)
 
 
 
@@ -207,6 +222,7 @@ class Team:
             # print("{} deaths: {}".format(hero.name,hero.deaths))
             kdr = hero.kills / hero.deaths
             print("{}'s K/D: {}".format(hero.name, dkr))
+
 
 class Armor:
     def __init__(self, name, max_block):
@@ -234,32 +250,47 @@ if __name__ == "__main__":
 
 
     # superMan.fight(batman)
-    hero = Hero("Wonder Woman")
-    # print(hero.attack()) # always 0 because has no abilities
+    # hero = Hero("Wonder Woman")
+    # # print(hero.attack()) # always 0 because has no abilities
 
-    ability = Ability("Divine Speed", 30)
-    hero.add_ability(ability)
-    # print(hero.attack()) # should be 1 - AbilityNum
+    # ability = Ability("Divine Speed", 30)
+    # hero.add_ability(ability)
+    # # print(hero.attack()) # should be 1 - AbilityNum
 
-    new_ability = Ability("Super Human Strength", 30)
-    hero.add_ability(new_ability)
-    # print(hero.attack()) # should be 1 - AbilityNum
+    # new_ability = Ability("Super Human Strength", 30)
+    # hero.add_ability(new_ability)
+    # # print(hero.attack()) # should be 1 - AbilityNum
 
-    hero2 = Hero("Jodie Foster")
-    ability2 = Ability("Science", 20)
-    mediumArmor = Armor("Medium Armor", 400)
-    hero2.add_ability(ability2)
-    # print(hero2.attack())
+    # hero2 = Hero("Jodie Foster")
+    # ability2 = Ability("Science", 20)
+    # mediumArmor = Armor("Medium Armor", 400)
+    # hero2.add_ability(ability2)
+    # # print(hero2.attack())
 
-    # hero.fight(hero2)
-    teamOne = Team("losers")
-    teamOne.add_hero(hero)
-    teamOne.add_hero(hero2)
-    teamOne.heroes[0].name = "Michael Jackson"
-    teamOne.remove_hero("Michael Jackson")
-    print("all heroes:")
-    teamOne.view_all_heroes()
-    # print(teamOne.heroes[0].name)
+    # # hero.fight(hero2)
+    # teamOne = Team("losers")
+    # teamOne.add_hero(hero)
+    # teamOne.add_hero(hero2)
+    # teamOne.heroes[0].name = "Michael Jackson"
+    # teamOne.remove_hero("Michael Jackson")
+    # print("all heroes:")
+    # teamOne.view_all_heroes()
+    # # print(teamOne.heroes[0].name)
 
-    teamTwo = Team("winners")
+    team_one = Team("One")
+    jodie = Hero("Jodie Foster")
+    aliens = Ability("Alien Friends", 10000)
+    jodie.add_ability(aliens)
+    team_one.add_hero(jodie)
+    team_two = Team("Two")
+    athena = Hero("Athena")
+    socks = Armor("Socks", 10)
+    athena.add_armor(socks)
+    team_two.add_hero(athena)
+    team_two.heroes[0].current_health == 100
+
+    team_one.attack(team_two)
+
+    # print(team_two.heroes[0].current_health)
+
 
