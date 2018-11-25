@@ -106,10 +106,12 @@ class Hero:
             if self.is_alive() == False:
                 print("{} diedss".format(self.name))
                 opponent.add_kill(1)
+                self.deaths += 1
             elif opponent.is_alive() == False:
                 # print("{} dieddf".format(opponent.name))
                 self.add_kill(1)
-        print(self.kills)
+                opponent.deaths += 1
+
 
     def add_kill(self, num_kills):
         '''
