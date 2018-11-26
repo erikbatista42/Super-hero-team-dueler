@@ -212,7 +212,7 @@ class Arena:
 
         return the new hero object
         '''
-        heroName = input("Let's create a new hero! What do you want to name this new hero?: ")
+        heroName = input("What do you want to name hero # ?: ")
         return Hero(heroName)
 
 
@@ -226,11 +226,11 @@ class Arena:
         Add the created hero to team one.
         '''
         teamOneName = input("Let's create the 1st team. What do you want to call them?: ")
-        numberOfHeroes = input("How many heroes do you want to have in Team {}? ".format(teamOneName))
+        numberOfHeroes =  int(input("How many heroes do you want to have in Team {}? (Say an integer like 2): ".format(teamOneName)))
 
         teamOne = Team(teamOneName)
 
-        while numberOfHeroes > 0:
+        while int(numberOfHeroes) > 0:
             numberOfHeroes -= 1
             teamOne.heroes.append(self.create_hero())
 
@@ -243,8 +243,8 @@ class Arena:
 
         Add the created hero to team two.
         '''
-        teamTwoName = input("Let's create the 2nd team. What do you want to call them?: ")
-        numberOfHeroes = input("How many heroes do you want to have in Team {}? () ".format(teamTwoName))
+        teamTwoName = input("\nNow, Let's create the 2nd team. What do you want to call them?: ")
+        numberOfHeroes = int(input("How many heroes do you want to have in Team {}? (Say an integer like 2): ".format(teamTwoName)))
 
         teamTwo = Team(teamTwoName)
 
