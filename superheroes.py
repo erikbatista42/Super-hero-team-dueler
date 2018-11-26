@@ -149,6 +149,17 @@ class Team:
             print("{}'s K/D: {}".format(hero.name, kdr))
 
 
+class Armor:
+
+    def __init__(self, name, max_block):
+        self.name = name
+        self.max_block = max_block
+
+    def block(self):
+        randomValue = random.randint(0, self.max_block)
+        return randomValue
+
+
 class Arena:
     def __init__(self):
         self.team_one = None
@@ -178,6 +189,7 @@ class Arena:
         '''
         # weaponName = input("Weapon name: ")
         # return Weapon
+        pass
 
     def create_armor(self):
         '''
@@ -200,7 +212,7 @@ class Arena:
 
         return the new hero object
         '''
-        heroName = input("Let's create a new hero! What do you want to name this hero?: ")
+        heroName = input("Let's create a new hero! What do you want to name this new hero?: ")
         return Hero(heroName)
 
 
@@ -214,6 +226,13 @@ class Arena:
         Add the created hero to team one.
         '''
         teamOneName = input("Let's create the 1st team. What do you want to call them?: ")
+        numberOfHeroes = input("How many heroes do you want to have in Team {}? ".format(teamOneName))
+
+        teamOne = Team(teamOneName)
+
+        while numberOfHeroes > 0:
+            numberOfHeroes -= 1
+            teamOne.heroes.append(self.create_hero())
 
 
     def build_team_two(self):
@@ -225,6 +244,15 @@ class Arena:
         Add the created hero to team two.
         '''
         teamTwoName = input("Let's create the 2nd team. What do you want to call them?: ")
+        numberOfHeroes = input("How many heroes do you want to have in Team {}? () ".format(teamTwoName))
+
+        teamTwo = Team(teamTwoName)
+
+        while numberOfHeroes > 0:
+            numberOfHeroes -= 1
+            teamTwo.heroes.append(self.create_hero())
+
+
 
 
     def team_battle(self):
@@ -232,6 +260,7 @@ class Arena:
         This method should battle the teams together.
         Call the attack method that exists in your team objects to do that battle functionality.
         '''
+        pass
 
     def show_stats(self):
         '''
@@ -243,6 +272,7 @@ class Arena:
         Show both teams average kill/death ratio.
         Show surviving heroes.
         '''
+        pass
 
 
 
