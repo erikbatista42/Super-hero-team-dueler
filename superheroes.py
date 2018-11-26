@@ -74,9 +74,6 @@ class Hero:
                 opponent.deaths += 1
 
 
-
-
-
 class Ability:
 
     def __init__(self, name, attack_strength):
@@ -109,8 +106,8 @@ class Team:
     def add_hero(self, Hero):
         self.heroes.append(Hero)
 
-    def remove_hero(self, name):
 
+    def remove_hero(self, name):
         for hero in self.heroes:
             if hero.name == name:
                 indexOfHero = self.heroes.index(hero)
@@ -152,19 +149,126 @@ class Team:
             print("{}'s K/D: {}".format(hero.name, kdr))
 
 
-class Armor:
+class Arena:
+    def __init__(self):
+        self.team_one = None
+        self.team_two = None
 
-    def __init__(self, name, max_block):
-        self.name = name
-        self.max_block = max_block
+    def create_ability(self):
+        '''
+        This method will allow a user to create an ability.
 
-    def block(self):
-        randomValue = random.randint(0, self.max_block)
-        return randomValue
+        Prompt the user for the necessary information to create a new ability object.
+
+        return the new ability object.
+        '''
+        abilityName = input("Ability name: ")
+        abilityDamage = input("How much damage attack will the ability {} have? (e.g 30)".format(abilityName))
+
+        return Ability(abilityName, abilityDamage)
+
+
+    def create_weapon(self):
+        '''
+        This method will allow a user to create a weapon.
+
+        Prompt the user for the necessary information to create a new weapon object.
+
+        return the new weapon object.
+        '''
+        # weaponName = input("Weapon name: ")
+        # return Weapon
+
+    def create_armor(self):
+        '''
+        This method will allow a user to create a piece of armor.
+
+        Prompt the user for the necessary information to create a new armor object.
+
+        return the new armor object.
+        '''
+        armorName = input("Armor name: ")
+        armorStrength = input("Armor strength: ")
+
+        return Armor(armorName, armorStrength)
+
+    def create_hero(self):
+        '''
+        This method should allow a user to create a hero.
+
+        User should be able to specify if they want armors, weapons, and abilites. Call the methods you made above and use the return values to build your hero.
+
+        return the new hero object
+        '''
+        heroName = input("Let's create a new hero! What do you want to name this hero?: ")
+        return Hero(heroName)
+
+
+
+    def build_team_one(self):
+        '''
+        This method should allow a user to create team one.
+        Prompt the user for the number of Heroes on team one and
+        call self.create_hero() for every hero that the user wants to add to team one.
+
+        Add the created hero to team one.
+        '''
+        teamOneName = input("Let's create the 1st team. What do you want to call them?: ")
+
+
+    def build_team_two(self):
+        '''
+        This method should allow a user to create team two.
+        Prompt the user for the number of Heroes on team two and
+        call self.create_hero() for every hero that the user wants to add to team two.
+
+        Add the created hero to team two.
+        '''
+        teamTwoName = input("Let's create the 2nd team. What do you want to call them?: ")
+
+
+    def team_battle(self):
+        '''
+        This method should battle the teams together.
+        Call the attack method that exists in your team objects to do that battle functionality.
+        '''
+
+    def show_stats(self):
+        '''
+        This method should print out battle statistics
+        including each team's average kill/death ratio.
+
+        Required Stats:
+        Declare winning team
+        Show both teams average kill/death ratio.
+        Show surviving heroes.
+        '''
+
 
 
 if __name__ == "__main__":
+    game_is_running = True
 
+    # Instantiate Game Arena
+    arena = Arena()
 
- ''' *** Shout out to Ramon for helping me with this project *** '''
+    # Build Teams
+    arena.build_team_one()
+    arena.build_team_two()
+
+    while game_is_running:
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
+
+        # Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            # Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()
+
+''' *** Shout out to Ramon for helping me with this project *** '''
 
