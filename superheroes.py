@@ -299,21 +299,7 @@ class Arena:
         Call the attack method that exists in your team objects to do that battle functionality.
         '''
         self.team_one.attack(self.team_two)
-        # if self.team_one.healthCheck() < 1:
-        #     print(self.team_two.name + " Wins")
-        #     print("Surviving Heroes:")
-        #     for x in self.team_two.heroes:
-        #         if x.current_health > 0:
-        #             print(x.name)
-        # elif self.team_two.healthCheck() < 1:
-        #     print(self.team_one.name + " Wins")
-        #     print("Surviving Heroes:")
-        #     for x in self.team_one.heroes:
-        #         if x.current_health > 0:
-        #             print(x.name)
-        # print("Team KDR:")
-        # self.team_one.stats()
-        # self.team_two.stats()
+
 
 
     def show_stats(self):
@@ -366,10 +352,25 @@ class Arena:
         # self.team_two.stats()
 
         #both teams kdr
-        self.team_one.stats()
-        self.team_two.stats()
+        # self.team_one.stats()
+        # self.team_two.stats()
 
         # show surviving heroes
+        if self.team_one.healthCheck() < 1:
+            print(self.team_two.name + " Wins")
+            print("Surviving Heroes:")
+            for x in self.team_two.heroes:
+                if x.current_health > 0:
+                    print(x.name)
+        elif self.team_two.healthCheck() < 1:
+            print(self.team_one.name + " Wins")
+            print("Surviving Heroes:")
+            for x in self.team_one.heroes:
+                if x.current_health > 0:
+                    print(x.name)
+        print("Team KDR:")
+        self.team_one.stats()
+        self.team_two.stats()
 
 
 
