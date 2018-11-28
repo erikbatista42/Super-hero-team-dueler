@@ -81,7 +81,7 @@ class Ability:
         self.attack_strength = attack_strength
 
     def attack(self):
-        randomAttackValue = random.randint(0, self.attack_strength)
+        randomAttackValue = random.randrange(0, int(self.attack_strength) // 1)
         return randomAttackValue
 
     def update_attack(self, new_attack_strength):
@@ -92,7 +92,7 @@ class Ability:
 class Weapon(Ability):
 
     def attack(self):
-        randomAttackValue = random.randint(self.attack_strength // 2, self.attack_strength)
+        randomAttackValue = random.randrange(int(self.attack_strength) // 2, int(self.attack_strength))
         return randomAttackValue
 
 
@@ -102,6 +102,12 @@ class Team:
         self.name = name
         self.heroes = list()
 
+
+    def healthCheck(self):
+        total = 0
+        for hero in self.heroes:
+            total += hero.current_health
+        return total
 
     def add_hero(self, Hero):
         self.heroes.append(Hero)
@@ -144,9 +150,21 @@ class Team:
 
     def stats(self):
         ''' Prints Kills/Deaths ratio for each hero'''
-        for hero in team.heroes:
-            kdr = hero.kills / hero.deaths
-            print("{}'s K/D: {}".format(hero.name, kdr))
+        # for hero in self.heroes:
+        #     kdr = hero.kills / hero.deaths
+        #     print("{}'s K/D: {}".format(hero.name, kdr))
+
+        for hero in self.heroes:
+            if(hero.deaths > 0):
+                print ("{}: {}".format(self.name, (hero.kills/hero.deaths)))
+            else:
+                print ("{}: {}".format(self.name, hero.kills))
+
+    def still_alive(self):
+        for hero in self.heroes:
+            if hero.current_health > 0:
+                return True
+        return False
 
 
 class Armor:
@@ -156,7 +174,7 @@ class Armor:
         self.max_block = max_block
 
     def block(self):
-        randomValue = random.randint(0, self.max_block)
+        randomValue = random.randrange(0, int(self.max_block))
         return randomValue
 
 
@@ -173,8 +191,8 @@ class Arena:
 
         return the new ability object.
         '''
-        abilityName = input("Ability name: ")
-        abilityDamage = input("How much damage attack will the ability {} have? (e.g 30)".format(abilityName))
+        abilityName = input("\nAbility name: ")
+        abilityDamage = input("How much damage attack will the ability {} have? (e.g 30): ".format(abilityName))
 
         return Ability(abilityName, abilityDamage)
 
@@ -187,9 +205,10 @@ class Arena:
 
         return the new weapon object.
         '''
-        # weaponName = input("Weapon name: ")
-        # return Weapon
-        pass
+        newAbilityName = input("\nOk! Let's create a weapon. What weapon do you want? (e.g shotgun): ")
+        newAbilityStrength = input("How much damage do you want your {} to cause? (e.g 25): ".format(newAbilityName))
+
+        return Weapon(newAbilityName, newAbilityStrength)
 
     def create_armor(self):
         '''
@@ -199,8 +218,8 @@ class Arena:
 
         return the new armor object.
         '''
-        armorName = input("Armor name: ")
-        armorStrength = input("Armor strength: ")
+        armorName = input("\nArmor type for hero (say something like medium light armor): ")
+        armorStrength = input("Armor strength (say something like 25): ")
 
         return Armor(armorName, armorStrength)
 
@@ -212,7 +231,7 @@ class Arena:
 
         return the new hero object
         '''
-        heroName = input("What do you want to name hero # ?: ")
+        heroName = input("\nHero name: ")
         return Hero(heroName)
 
 
@@ -226,14 +245,19 @@ class Arena:
         Add the created hero to team one.
         '''
         teamOneName = input("Let's create the 1st team. What do you want to call them?: ")
-        numberOfHeroes =  int(input("How many heroes do you want to have in Team {}? (Say an integer like 2): ".format(teamOneName)))
+        numberOfHeroes = int(input("How many heroes do you want to have in Team {}? (Say an integer like 2): ".format(teamOneName)))
 
-        teamOne = Team(teamOneName)
 
-        while int(numberOfHeroes) > 0:
+
+        self.team_one = Team(teamOneName)
+
+        while numberOfHeroes > 0:
             numberOfHeroes -= 1
-            teamOne.heroes.append(self.create_hero())
-
+            self.team_one.heroes.append(self.create_hero())
+        for hero in self.team_one.heroes:
+            hero.armors.append(self.create_armor())
+            hero.abilities.append(self.create_ability())
+            hero.abilities.append(self.create_weapon())
 
     def build_team_two(self):
         '''
@@ -246,13 +270,27 @@ class Arena:
         teamTwoName = input("\nNow, Let's create the 2nd team. What do you want to call them?: ")
         numberOfHeroes = int(input("How many heroes do you want to have in Team {}? (Say an integer like 2): ".format(teamTwoName)))
 
-        teamTwo = Team(teamTwoName)
+        self.team_two = Team(teamTwoName)
 
         while numberOfHeroes > 0:
             numberOfHeroes -= 1
-            teamTwo.heroes.append(self.create_hero())
+            self.team_two.heroes.append(self.create_hero())
+        for hero in self.team_two.heroes:
+            hero.armors.append(self.create_armor())
+            hero.abilities.append(self.create_ability())
+            hero.abilities.append(self.create_weapon())
 
 
+    def alive_heroes(self):
+        '''
+        Creates a list of heroes who have health > 0
+        '''
+        alive_list = []
+        #find out if team one has heroes alive
+        for hero in self.heroes:
+            if hero.is_alive():
+                alive_list.append(hero)
+        return alive_list
 
 
     def team_battle(self):
@@ -260,7 +298,23 @@ class Arena:
         This method should battle the teams together.
         Call the attack method that exists in your team objects to do that battle functionality.
         '''
-        pass
+        self.team_one.attack(self.team_two)
+        # if self.team_one.healthCheck() < 1:
+        #     print(self.team_two.name + " Wins")
+        #     print("Surviving Heroes:")
+        #     for x in self.team_two.heroes:
+        #         if x.current_health > 0:
+        #             print(x.name)
+        # elif self.team_two.healthCheck() < 1:
+        #     print(self.team_one.name + " Wins")
+        #     print("Surviving Heroes:")
+        #     for x in self.team_one.heroes:
+        #         if x.current_health > 0:
+        #             print(x.name)
+        # print("Team KDR:")
+        # self.team_one.stats()
+        # self.team_two.stats()
+
 
     def show_stats(self):
         '''
@@ -272,7 +326,50 @@ class Arena:
         Show both teams average kill/death ratio.
         Show surviving heroes.
         '''
-        pass
+        # teamOneKills = 0
+        # teamTwoKills = 0
+
+        # teamOneDeaths = 0
+        # teamTwoDeaths = 0
+
+        # for hero in self.team_one.heroes:
+        #     hero.deaths += teamOneDeaths
+        #     hero.kills += teamOneKills
+
+
+        # for hero in self.team_two.heroes:
+        #     hero.deaths += teamTwoDeaths
+        #     hero.kills += teamTwoKills
+
+        # teamOneKdr = teamOneKills / teamOneDeaths
+        # teamTwoKdr = teamTwoKills / teamTwoDeaths
+
+        # print("Kdr for team {}: {}".format(team_one.name, teamOneKdr))
+        # print("Kdr for team {}: {}".format(team_two.name, teamTwoKdr))
+        print("STATS: ")
+        # winning team
+
+        # if self.team_one.healthCheck() < 1:
+        #     print(self.team_two.name + " Wins")
+        #     print("Surviving Heroes:")
+        #     for x in self.team_two.heroes:
+        #         if x.current_health > 0:
+        #             print(x.name)
+        # elif self.team_two.healthCheck() < 1:
+        #     print(self.team_one.name + " Wins")
+        #     print("Surviving Heroes:")
+        #     for x in self.team_one.heroes:
+        #         if x.current_health > 0:
+        #             print(x.name)
+        # print("Team KDR:")
+        # self.team_one.stats()
+        # self.team_two.stats()
+
+        #both teams kdr
+        self.team_one.stats()
+        self.team_two.stats()
+
+        # show surviving heroes
 
 
 
@@ -294,7 +391,6 @@ if __name__ == "__main__":
         # Check for Player Input
         if play_again.lower() == "n":
             game_is_running = False
-
         else:
             # Revive heroes to play again
             arena.team_one.revive_heroes()
