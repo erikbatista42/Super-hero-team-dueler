@@ -68,7 +68,7 @@ class Hero:
                 print("{} died".format(self.name))
                 opponent.add_kill(1)
                 self.deaths += 1
-            elif opponent.is_alive() == False:
+            if opponent.is_alive() == False:
                 print("{} died".format(opponent.name))
                 self.add_kill(1)
                 opponent.deaths += 1
@@ -81,7 +81,7 @@ class Ability:
         self.attack_strength = attack_strength
 
     def attack(self):
-        randomAttackValue = random.randrange(0, int(self.attack_strength) // 1)
+        randomAttackValue = random.randint(0, int(self.attack_strength))
         return randomAttackValue
 
     def update_attack(self, new_attack_strength):
@@ -142,6 +142,11 @@ class Team:
             selfRandomHero.fight(other_team_random_hero)
             other_team_random_hero.current_health -= 1
 
+    # def attack(self, other_team):
+    #      while self.healthCheck() and other_team.healthCheck():
+    #         self.heroes[random.randint(0, len(self.heroes)-1)].fight(other_team.heroes[random.randint(0, len(other_team.heroes)-1)])
+
+
 
     def revive_heroes(self, health=100):
         ''' Resets all heroes health to their original starting value.'''
@@ -156,9 +161,9 @@ class Team:
 
         for hero in self.heroes:
             if(hero.deaths > 0):
-                print ("{}: {}".format(self.name, (hero.kills/hero.deaths)))
+                print("{}: {}".format(self.name, (hero.kills/hero.deaths)))
             else:
-                print ("{}: {}".format(self.name, hero.kills))
+                print("{}: {}".format(self.name, hero.kills))
 
     def still_alive(self):
         for hero in self.heroes:
@@ -252,6 +257,7 @@ class Arena:
         self.team_one = Team(teamOneName)
 
         while numberOfHeroes > 0:
+            # subtract num of heroes so while loop can end
             numberOfHeroes -= 1
             self.team_one.heroes.append(self.create_hero())
         for hero in self.team_one.heroes:
@@ -312,48 +318,7 @@ class Arena:
         Show both teams average kill/death ratio.
         Show surviving heroes.
         '''
-        # teamOneKills = 0
-        # teamTwoKills = 0
-
-        # teamOneDeaths = 0
-        # teamTwoDeaths = 0
-
-        # for hero in self.team_one.heroes:
-        #     hero.deaths += teamOneDeaths
-        #     hero.kills += teamOneKills
-
-
-        # for hero in self.team_two.heroes:
-        #     hero.deaths += teamTwoDeaths
-        #     hero.kills += teamTwoKills
-
-        # teamOneKdr = teamOneKills / teamOneDeaths
-        # teamTwoKdr = teamTwoKills / teamTwoDeaths
-
-        # print("Kdr for team {}: {}".format(team_one.name, teamOneKdr))
-        # print("Kdr for team {}: {}".format(team_two.name, teamTwoKdr))
-        print("STATS: ")
-        # winning team
-
-        # if self.team_one.healthCheck() < 1:
-        #     print(self.team_two.name + " Wins")
-        #     print("Surviving Heroes:")
-        #     for x in self.team_two.heroes:
-        #         if x.current_health > 0:
-        #             print(x.name)
-        # elif self.team_two.healthCheck() < 1:
-        #     print(self.team_one.name + " Wins")
-        #     print("Surviving Heroes:")
-        #     for x in self.team_one.heroes:
-        #         if x.current_health > 0:
-        #             print(x.name)
-        # print("Team KDR:")
-        # self.team_one.stats()
-        # self.team_two.stats()
-
-        #both teams kdr
-        # self.team_one.stats()
-        # self.team_two.stats()
+        print("STATS:")
 
         # show surviving heroes
         if self.team_one.healthCheck() < 1:
@@ -392,10 +357,11 @@ if __name__ == "__main__":
         # Check for Player Input
         if play_again.lower() == "n":
             game_is_running = False
-        else:
+        elif play_again.lower() == "y":
             # Revive heroes to play again
             arena.team_one.revive_heroes()
             arena.team_two.revive_heroes()
+
 
 ''' *** Shout out to Ramon for helping me with this project *** '''
 
