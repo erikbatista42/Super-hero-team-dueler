@@ -363,5 +363,6 @@ if __name__ == "__main__":
             arena.team_two.revive_heroes()
 
 
-''' *** Shout out to Ramon for helping me with this project *** '''
+
+''' *** Shout out to Ramon & Sean for helping me with this project *** '''
 
